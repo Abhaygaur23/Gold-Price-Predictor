@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Residential Property Rates Predictor</title>
+</head>
+<style>
+    * {
+        font-size: 40px;
+    }
+
+    body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(206, 8, 68);
+    }
+
+    h1 {
+        color: slateblue;
+        text-align: center;
+    }
+
+    .box {
+        background-color: white;
+        padding: 0px 10px 10px 10px;
+        box-shadow: 0px 0px 10px 10px black;
+    }
+
+    #locality {
+        text-align: center;
+        border-radius: 5px;
+    }
+
+    #year {
+        border-radius: 10px;
+    }
+
+    #predict {
+        background-color: green;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    #predict:hover {
+        background-color: darkgreen;
+    }
+
+    #reset {
+        border-radius: 5px;
+        background-color: red;
+        cursor: pointer;
+    }
+
+    #reset:hover {
+        background-color: darkred;
+
+    }
+
+    .button {
+        margin-top: 50px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    #output {
+        display: flex;
+        /* color: brown; */
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media only screen and (max-width: 651px) {
+        * {
+            font-size: 20px;
+        }
+
+        .button {
+            margin-top: 30px;
+        }
+    }
+
+    @media only screen and (max-width: 352px) {
+        * {
+            font-size: 10px;
+        }
+
+        .button {
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+    }
+</style>
+
+<body>
+    <div class="box">
+        <h1>Gold Price Predictor</h1>
+        <div>
+            <label>Enter Year:</label>
+            <input type="text" id="year" placeholder="Enter">
+        </div>
+
+        <div class="button">
+            <button id="predict">Predict</button>
+            <button id="reset">Reset</button>
+        </div>
+        <div id="output"></div>
+        <script src="script.js"></script>
+    </div>
+    <script>
+        function run() {
+            let year = document.getElementById("year").value;
+            if (year == "" || Number(year) < 2010) {
+                if (year == "") {
+
+                    document.getElementById("output").innerText = "Please enter year!";
+                    document.getElementById("output").style.color = "red";
+                }
+                else {
+                    document.getElementById("output").innerText = "Please enter year greater than 2014!";
+                    document.getElementById("output").style.color = "red"
+                }
+            }
+            else {
+                let output = Math.round(3176 * year - 6.368e+006);
+                document.getElementById("output").innerText = `Predicted Average Price: ${output} Rs/10gram`;
+                document.getElementById("output").style.color = "blue"
+            }
+        }
+        document.getElementById("predict").addEventListener("click", () => {
+            run();
+        })
+        document.addEventListener("keydown", (event) => {
+            if (event.key == "Enter") {
+                run();
+            }
+        })
+        document.getElementById("reset").addEventListener("click", () => {
+            window.location.reload();
+        })
+
+    </script>
+</body>
+</html>
